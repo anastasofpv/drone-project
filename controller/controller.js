@@ -36,3 +36,30 @@ exports.getMap = (req, res) => {
         }
     })
 }
+exports.postThermal = (req, res) => {
+    model.postThermal(req.body.z, (err,result) => {
+        if(err){
+            throw err
+        }
+        else{
+            // log("new data from thermal camera")
+            if(result === 1){
+                res.send("data successfully added")
+            }
+        }
+    })
+}
+
+exports.getThermal = (req, res) => {
+    model.getThermal((err,result) => {
+        if(err){
+            throw err;
+        }
+        
+        else{
+            // log("thermal data read from client")
+            res.json({'z':result})
+        }
+    })
+}
+
