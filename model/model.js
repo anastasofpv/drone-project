@@ -17,3 +17,17 @@ exports.getMap = function (callback) {
     // log(thermalResult);
     callback(null,mapResult)
 }
+
+let thermalResult = undefined;
+let mapResult = undefined;
+
+exports.postThermal = async function (data,callback) {
+    // log(data);
+    thermalResult = data;
+    callback(null,1)
+}
+
+exports.getThermal = function (callback) {
+    // log(thermalResult);
+    callback(null,thermalResult)
+}
