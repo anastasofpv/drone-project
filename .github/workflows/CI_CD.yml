@@ -2,9 +2,9 @@ name: CI_CD
 
 on:
   push:
-    branches: [ "develop" ]
-#   pull_request:
-#     branches: [ "master" ]
+    branches: [ "develop", "master" ]
+  pull_request:
+    branches: [ "master", "develop"]
 
   workflow_dispatch:
 
@@ -20,17 +20,17 @@ jobs:
       - name: Build Container
         run: docker build -t drone-server:latest .
         
-      - name: Start Containers
-        run: docker-compose -f "drone.yaml" up -d
+#       - name: Start Containers
+#         run: docker-compose -f "drone.yaml" up -d
         
-      - name: Install dependecies
-        run: pip install pymongo
+#       - name: Install dependecies
+#         run: pip install pymongo
         
-      - name: Run Tests
-        run: python tests/test.py
+#       - name: Run Tests
+#         run: python tests/test.py
         
-      - name: Stop containers
-        if: always()
-        run: docker-compose -f "drone.yaml" down
+#       - name: Stop containers
+#         if: always()
+#         run: docker-compose -f "drone.yaml" down
         
         
