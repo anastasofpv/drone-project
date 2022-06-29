@@ -34,6 +34,7 @@ jobs:
         run: docker-compose -f "drone.yaml" down
         
   Build_and_Push:
+    needs: Test
     name: Build Container
     runs-on: ubuntu-latest
     steps:
