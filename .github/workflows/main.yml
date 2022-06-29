@@ -27,7 +27,7 @@ jobs:
 #         run: pip install pymongo
         
 #       - name: Run Tests
-#         run: python tests/test.py
+#         run: python tests/tests.py
         
 #       - name: Stop containers
 #         if: always()
