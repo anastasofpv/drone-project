@@ -124,23 +124,15 @@
         style: "mapbox://styles/mapbox/satellite-v9",
         // style: 'mapbox://styles/mapbox/streets-v11',
         center: [21.745491695194154, 38.24949792021122],
-        zoom: 16,
+        zoom: 3,
       });
 
-      let droneID = 1;
-      let temperature = 25;
-
-      var el = document.createElement("div");
-      el.className = "marker";
-
-      const popup = new mapboxgl.Popup({ offset: 25 }).setText(
-        `Drone ID: ${droneID} \nTemperature: ${temperature}`
-      );
-
-      const marker1 = new mapboxgl.Marker(el)
-        .setLngLat([21.745491695194154, 38.24949792021122])
-        .setPopup(popup)
-        .addTo(map);
+      let activeDrones = [];
+      let markers = [];
+      let popups = [];
+      let el = [];
+      
+      let new_index = 0;
 
       realTimeData = async () => {
         //socket.io connection
@@ -148,10 +140,34 @@
 
         socket.on("newData", (data) => {
           console.log(data);
-          marker1.setLngLat([data["point"][0], data["point"][1]]);
-          droneID = data["droneID"];
-          temperature = data["temperature"];
-          popup.setText(`Drone ID: ${droneID} \nTemperature: ${temperature}`);
+
+            droneID = data["droneID"];
+
+            if (activeDrones.includes(droneID)){
+                console.log(`Drone ID ${droneID} already exists`)
+                index = activeDrones.indexOf(droneID)
+                markers[index].setLngLat([data["point"][0], data["point"][1]]);
+                temperature = data["temperature"];
+                popups[index].setText(`Drone ID: ${droneID} \nTemperature: ${temperature}`);
+            }
+
+            else{
+                activeDrones[new_index] = droneID;
+                console.log(`New index = ${new_index}, activedrones = ${activeDrones}`)
+
+                el[new_index] = document.createElement("div");
+                el[new_index].className = "marker";
+
+                temperature = data["temperature"];
+                popups[new_index]  =  new mapboxgl.Popup({ offset: 25 }).setText( `Drone ID: ${droneID} \nTemperature: ${temperature}`);
+                markers[new_index] = new mapboxgl.Marker(el[new_index])
+                                                  .setLngLat([data["point"][0], data["point"][1]])
+                                                  .setPopup(popups[new_index])
+                                                  .addTo(map);
+                new_index += 1;
+            }
+
+        
         });
       };
 
