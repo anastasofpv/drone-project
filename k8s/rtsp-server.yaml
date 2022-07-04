@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rtsp-server-deployment
+  labels:
+    app: rtsp-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rtsp-server
+  template:
+    metadata:
+      labels:
+        app: rtsp-server
+    spec:
+      containers:
+      - name: rtsp-server
+        image: aler9/rtsp-simple-server
+        ports:
+        - name: port8554
+          containerPort: 8554
+        - name: port1935
+          containerPort: 1935
+        - name: port8888
+          containerPort: 8888 
+        env:
+        - name: RTSP_PROTOCOLS
+          value: tcp
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rtsp-server-service
+spec:
+  selector:
+    app: rtsp-server
+  type: LoadBalancer
+  ports:
+  - name: something
+    port: 8554
+    targetPort: 8554
+  - name: publish
+    port: 1935
+    targetPort: 1935
+    nodePort: 31935
+  - name: hls
+    port: 8888
+    targetPort: 8888
+    nodePort: 31888
