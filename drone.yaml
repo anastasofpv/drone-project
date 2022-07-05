@@ -3,7 +3,7 @@ version: '3.1'
 services:
 
   drone-server:
-    image: drone-server:latest
+    image: anastasofpv/drone-server:13
     restart: always
     ports:
       - 3000:3000
@@ -39,11 +39,12 @@ services:
     environment:
       RTSP_PROTOCOLS: tcp
 
-#   reverse-ssh-tunnel:
-#     image: efrecon/rsshd
-#     restart: always
-#     ports:
-#       - 
+  reverse-ssh-tunnel:
+    image: efrecon/rsshd
+    restart: always
+    ports:
+      - 22:3029
+      - 3031:3031
 
 # volumes:
 #   mongo-data:
