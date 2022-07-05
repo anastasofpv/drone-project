@@ -99,18 +99,7 @@ This project runs on Ubuntu machines.
    ```sh
    cd drone-project
    ```
-* ### <b>Run the project local</b>
    
-    3. Build docker image
-         ```sh
-        docker build -t drone-server:latest .
-        ```
-    4. Start the containers
-        ```sh
-        docker compose -f "drone.yaml" up -d
-        ```
-
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -165,7 +154,7 @@ This project runs on Ubuntu machines.
          e.g using ffmpeg 
         
         ```sh
-        ffmpeg GRAFOUME
+        ffmpeg ...
         ```
 
     7. Stop the containers
@@ -191,7 +180,6 @@ This project runs on Ubuntu machines.
 - [x] Deployed to Kubernetes Cluster
 - [ ] View previous Report Stats
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
