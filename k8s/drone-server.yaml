@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: drone-server
-        image: drone-server:0.1
+        image: drone-server:0
         ports:
         - name: port3000
           containerPort: 3000
