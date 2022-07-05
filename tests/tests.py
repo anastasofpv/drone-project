@@ -7,7 +7,6 @@ import requests
 N = 10
 url = "http://localhost:3000/api/map"
 
-
 def test_post_api(N, url):
 
     try:
