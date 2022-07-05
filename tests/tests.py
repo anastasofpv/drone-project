@@ -4,6 +4,7 @@ import random
 import pymongo
 import requests
 
+
 N = 10
 url = "http://localhost:3000/api/map"
 
