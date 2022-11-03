@@ -136,7 +136,7 @@
 
       realTimeData = async () => {
         //socket.io connection
-        const socket = io("http://localhost:3000/api/droneData");
+        const socket = io("http://drone-server-service:3000/api/droneData");
 
         socket.on("newData", (data) => {
           console.log(data);
@@ -183,7 +183,7 @@
       height="288"
     >
       <source
-        src="http://localhost:8888/drone1/index.m3u8"
+        src="http://rtsp-server-service:8888/drone1/index.m3u8"
         type="application/x-mpegURL"
       />
       <!-- <source src="http://94.64.99.30:8080/hls/test.m3u8" type="application/x-mpegURL"> -->
@@ -268,7 +268,7 @@
       Plotly.newPlot("heatmap", points, layout);
 
       setInterval(async function () {
-        let response = await fetch("http://localhost:3000/api/thermal");
+        let response = await fetch("http://drone-server-service:3000/api/thermal");
         // let response = await fetch('http://94.64.99.30:3000/api/thermal')
 
         response = await response.json();
