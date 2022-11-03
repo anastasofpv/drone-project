@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drone-server-deployment
+  labels:
+    app: drone-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: drone-server
+  template:
+    metadata:
+      labels:
+        app: drone-server
+    spec:
+      containers:
+      - name: drone-server
+        image: drone-server:0
+        ports:
+        - name: port3000
+          containerPort: 3000
+         
+       
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: drone-server-service
+spec:
+  selector:
+    app: drone-server
+  type: LoadBalancer
+  ports:
+  - name: server
+    port: 3000
+    targetPort: 3000
+    nodePort: 30000
